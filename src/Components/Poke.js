@@ -31,7 +31,7 @@ function Poke() {
   }
   useEffect(() => {
     fetching(id);
-  }, []);
+  }, [id]);
   return (
     <div className='Poke'>
       <form onSubmit={(e) => {
@@ -78,8 +78,8 @@ function Poke() {
                 </div>
               </div>
               <div>
-                <img src={poke.sprites.back_default} title={`The back of ${name}`} />
-                <img src={poke.sprites.front_default} title={`The front of ${name}`} />
+                <img src={poke.sprites.back_default} title={`The back of ${name}`} alt='' />
+                <img src={poke.sprites.front_default} title={`The front of ${name}`} alt='' />
               </div>
               <li>
                 {generation}
