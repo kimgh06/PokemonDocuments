@@ -31,7 +31,7 @@ function Poke() {
   }
   useEffect(() => {
     fetching(id);
-  }, []);
+  }, [id]);
   return (
     <div className='Poke'>
       <form>
