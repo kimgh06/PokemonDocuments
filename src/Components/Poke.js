@@ -78,8 +78,8 @@ function Poke() {
                 </div>
               </div>
               <div>
-                <img src={poke.sprites.back_default} title={`The back of ${name}`} alt='' />
-                <img src={poke.sprites.front_default} title={`The front of ${name}`} alt='' />
+                <img src={poke.sprites.back_default} title={`The back of ${name}`} alt={name} />
+                <img src={poke.sprites.front_default} title={`The front of ${name}`} alt={name} />
               </div>
               <li>
                 {generation}
