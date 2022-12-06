@@ -23,7 +23,7 @@ function Poke() {
       setSpecies(species);
       setEvolve(evolve);
       setGeneration(species.generation.url.slice(-2, -1));
-      console.log(json, species);
+      // console.log(json, species);
       setLoading(false);
     } catch (error) {
       alert("요청한 데이터를 찾지 못했습니다. 다시입력 해주세요.\n" + error.message);
