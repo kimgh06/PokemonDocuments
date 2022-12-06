@@ -1,0 +1,43 @@
+$gray:#DCDCDC;
+
+.pokeNum{
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.Poke{
+  form{
+    display: flex;
+    input{
+      width: 250px;
+    }
+    button{
+      width: 70px;
+    }
+  }
+  div{
+    margin: auto;
+    button{
+      margin: 150px 0px;
+      height: 50px;
+      border:none;
+      border-radius: 10px;
+      background-color: $gray;
+      &:hover{
+        background-color: lighten($gray, 5%);
+      }
+      &:active{
+        background-color: darken($gray, 5%);
+      }
+    }
+  }
+  width: 300px;
+  margin:auto;
+  ul{
+    list-style: square;
+  }
+}
+pre{
+  background-color: #E6E6FA;
+  padding:10px;
+  overflow: auto;
+  white-space: pre-wrap; /* pre tag내에 word wrap */
+}
