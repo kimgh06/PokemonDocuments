@@ -16,6 +16,15 @@ $gray:#DCDCDC;
     }
     button{
       width: 7em;
+      border:none;
+      border-radius: 1em;
+      background-color: $gray;
+      &:hover{
+        background-color: lighten($gray, 5%);
+      }
+      &:active{
+        background-color: darken($gray, 5%);
+      }
     }
   }
   div{
