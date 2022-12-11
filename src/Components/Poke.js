@@ -31,13 +31,14 @@ function Poke() {
   }
   useEffect(() => {
     fetching(id);
-  }, [id]);
+  }, [false]);
   return (
     <div className='Poke'>
       <form>
         <input value={id} onChange={(e) => {
           setId(parseInt(e.target.value));
         }} placeholder='Type id or name in English' />
+        &nbsp;
         <button
           onClick={(e) => {
             e.preventDefault();
