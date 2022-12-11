@@ -47,16 +47,21 @@ function Poke() {
       </form>
       {
         loading ? <h2>Loading...</h2> :
-          <div style={{ display: 'flex' }}>
+          <div style={{
+            display: 'flex',
+          }}>
             <button onClick={() => {
               setId((c) => { return c - 1 });
               fetching(id - 1);
             }}>◀</button>
             <div style={{
-              marginLeft: '-12px'
+              marginLeft: '-12px',
+              width: '100%',
+              textAlign: 'center',
             }}>
               <ul>
                 <div style={{
+                  justifyContent: 'center',
                   display: 'flex',
                 }}>
                   <b className='pokeNum' style={{
@@ -148,8 +153,7 @@ function Poke() {
                       fontSize: '15px',
                       textAlign: 'center',
                       borderRadius: '8px',
-                      marginLeft: '20%',
-                      marginTop: '10px',
+                      marginTop: '1em',
                     }}>
                     <option>--Choose--</option>
                     {
