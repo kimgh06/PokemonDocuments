@@ -88,15 +88,14 @@ function Poke() {
                     </select>
                     <div style={{ display: 'flex' }}>
                       {species.genera.map((i, n) => langName === i.language.name && <div key={n} value={i.language.name} >{i.genus}</div>)}
-                      <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)' }}
+                      <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)', marginTop: '3px' }}
                         onClick={() => {
                           bookMark.toString().indexOf(id) !== -1 ? setBookMark(bookMark.filter((e) => e !== id)) : setBookMark([...bookMark, id]);
-                          console.log(bookMark);
                         }}>
                         {bookMark.toString().indexOf(id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
-                          style={{ width: '20px', height: '20px' }} alt='BookMarkOff' />}
+                          style={{ width: '20px', height: '20px' }} alt='BookMarkOff' title='BookMarkOff' />}
                         {bookMark.toString().indexOf(id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
-                          style={{ width: '20px', height: '20px' }} alt='BookMarkOn' />}
+                          style={{ width: '20px', height: '20px' }} alt='BookMarkOn' title='BookMarkOn' />}
                       </button>
                     </div>
                   </div>
