@@ -3,7 +3,7 @@ import './Poke.scss';
 
 function Poke() {
   const [id, setId] = useState(25);
-  // const [bookMark, setBookMark] = useState([]); //북마크
+  // const [bookMark, setBookMark] = useState([]); /*북마크*/
   const [langNo, setLangNo] = useState(2); //언어 번호
   const [langName, setLangName] = useState('ko'); //설명을 띄우기 위한 언어이름 설정
   const [generation, setGeneration] = useState(); //세대
@@ -51,11 +51,14 @@ function Poke() {
         display: 'flex',
       }}>
         <button className='sideButton' onClick={() => {
-          setId((c) => { return c - 1 });
+          setId((c) => {
+            if (c > 0)
+              return parseInt(c - 1)
+          });
           fetching(id - 1);
         }}>◀</button>
         {
-          loading ? <h2>Loading...</h2> :
+          loading ? <div><h2>Loading...</h2></div> :
             <div style={{
               marginLeft: '-12px',
               width: '100%',
@@ -176,7 +179,7 @@ function Poke() {
             </div>
         }
         <button className='sideButton' onClick={() => {
-          setId((c) => { return c + 1 });
+          setId((c) => { return parseInt(c + 1) });
           fetching(id + 1);
         }}>▶</button>
       </div>
