@@ -30,7 +30,8 @@ function Poke() {
   }
   useEffect(() => {
     fetching(id);
-  }, [id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className='Poke'>
       <form>
