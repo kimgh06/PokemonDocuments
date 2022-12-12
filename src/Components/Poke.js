@@ -51,7 +51,7 @@ function Poke() {
           <div style={{
             display: 'flex',
           }}>
-            <button onClick={() => {
+            <button className='sideButton' onClick={() => {
               setId((c) => { return c - 1 });
               fetching(id - 1);
             }}>◀</button>
@@ -173,7 +173,7 @@ function Poke() {
                 </div>
               </ul>
             </div>
-            <button onClick={() => {
+            <button className='sideButton' onClick={() => {
               setId((c) => { return c + 1 });
               fetching(id + 1);
             }}>▶</button>
