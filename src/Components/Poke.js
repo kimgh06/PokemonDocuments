@@ -4,7 +4,7 @@ import Bookmark from './Bookmark';
 
 function Poke() {
   const [id, setId] = useState(25);
-  const [bookMark, setBookMark] = useState([]); /*북마크*/
+  const [bookMark, setBookMark] = useState([]); /*북마크 번호 배열*/
   const [langNo, setLangNo] = useState(2); //언어 번호
   const [langName, setLangName] = useState('ko'); //설명을 띄우기 위한 언어이름 설정
   const [generation, setGeneration] = useState(); //세대
@@ -92,11 +92,12 @@ function Poke() {
                         {species.genera.map((i, n) => langName === i.language.name && <div key={n} value={i.language.name} >{i.genus}</div>)}
                         <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)', marginTop: '5px' }}
                           onClick={() => {
-                            bookMark.toString().indexOf(id) !== -1 ? setBookMark(bookMark.filter((e) => e !== id)) : setBookMark([...bookMark, id]);
+                            bookMark.findIndex(e => e.id === id) !== -1 ? setBookMark(bookMark.filter((e) => e.id !== id))
+                              : setBookMark([...bookMark, { id, name, color: species.color.name }]);
                           }}>
-                          {bookMark.toString().indexOf(id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
+                          {bookMark.findIndex(e => e.id === id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
                             style={{ width: '20px', height: '20px' }} alt='BookMarkOff' title='북마크하기' />}
-                          {bookMark.toString().indexOf(id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
+                          {bookMark.findIndex(e => e.id === id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
                             style={{ width: '20px', height: '20px' }} alt='BookMarkOn' title='북마크끄기' />}
                         </button>
                       </div>
