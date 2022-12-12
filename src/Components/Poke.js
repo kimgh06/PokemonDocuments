@@ -3,6 +3,7 @@ import './Poke.scss';
 
 function Poke() {
   const [id, setId] = useState(25);
+  // const [bookMark, setBookMark] = useState([]); //북마크
   const [langNo, setLangNo] = useState(2); //언어 번호
   const [langName, setLangName] = useState('ko'); //설명을 띄우기 위한 언어이름 설정
   const [generation, setGeneration] = useState(); //세대
@@ -36,7 +37,7 @@ function Poke() {
     <div className='Poke'>
       <form>
         <input value={id} onChange={(e) => {
-          setId(parseInt(e.target.value));
+          setId(parseInt(e.target.value) || '');
         }} placeholder='Type id or name in English' />
         &nbsp;
         <button
@@ -46,15 +47,15 @@ function Poke() {
           }}
         >Submit</button>
       </form>
-      {
-        loading ? <h2>Loading...</h2> :
-          <div style={{
-            display: 'flex',
-          }}>
-            <button className='sideButton' onClick={() => {
-              setId((c) => { return c - 1 });
-              fetching(id - 1);
-            }}>◀</button>
+      <div style={{
+        display: 'flex',
+      }}>
+        <button className='sideButton' onClick={() => {
+          setId((c) => { return c - 1 });
+          fetching(id - 1);
+        }}>◀</button>
+        {
+          loading ? <h2>Loading...</h2> :
             <div style={{
               marginLeft: '-12px',
               width: '100%',
@@ -110,7 +111,7 @@ function Poke() {
                 <li>
                   {`${name}`}'s weight : {(poke.weight) / 10} kg
                 </li>
-                {
+                {//진화 전
                   species.evolves_from_species &&
                   <li>
                     evolved from : <span onClick={() => {
@@ -123,7 +124,7 @@ function Poke() {
                       {species.evolves_from_species.name}</span>
                   </li>
                 }
-                {
+                { //진화 후
                   evolve.chain.evolves_to.length ? evolve.chain.species.name === poke.name &&
                     <li>evolves to : <span onClick={() => {
                       setId((current) => { return parseInt(evolve.chain.evolves_to[0].species.url.slice(42, -1)) });
@@ -173,13 +174,13 @@ function Poke() {
                 </div>
               </ul>
             </div>
-            <button className='sideButton' onClick={() => {
-              setId((c) => { return c + 1 });
-              fetching(id + 1);
-            }}>▶</button>
-          </div>
-      }
-    </div >
+        }
+        <button className='sideButton' onClick={() => {
+          setId((c) => { return c + 1 });
+          fetching(id + 1);
+        }}>▶</button>
+      </div>
+    </div>
   );
 }
 
