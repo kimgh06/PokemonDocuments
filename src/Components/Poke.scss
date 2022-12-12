@@ -9,11 +9,13 @@ $gray:#DCDCDC;
   width: 40em;
   margin:auto;
   .BookMark{
-    margin-left: 2em;
-    border: 1px solid;
-    height: 20em;
-    width: 20em;
-    overflow: scroll;
+    .BookMarkList{
+      margin-left: 2em;
+      border: 1px solid;
+      height: 20em;
+      width: 20em;
+      overflow-y: scroll;
+    }
   }
   form{
     justify-content: center;
