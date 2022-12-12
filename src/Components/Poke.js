@@ -3,7 +3,7 @@ import './Poke.scss';
 
 function Poke() {
   const [id, setId] = useState(25);
-  // const [bookMark, setBookMark] = useState([]); /*북마크*/
+  const [bookMark, setBookMark] = useState([]); /*북마크*/
   const [langNo, setLangNo] = useState(2); //언어 번호
   const [langName, setLangName] = useState('ko'); //설명을 띄우기 위한 언어이름 설정
   const [generation, setGeneration] = useState(); //세대
@@ -86,8 +86,18 @@ function Poke() {
                     }} title='Select your language'>
                       {species.names.map((i, n) => <option key={n} value={i.language.url.slice(-2, -1) - 1}>{i.language.name}</option>)}
                     </select>
-                    <div>
+                    <div style={{ display: 'flex' }}>
                       {species.genera.map((i, n) => langName === i.language.name && <div key={n} value={i.language.name} >{i.genus}</div>)}
+                      <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)' }}
+                        onClick={() => {
+                          bookMark.toString().indexOf(id) !== -1 ? setBookMark(bookMark.filter((e) => e !== id)) : setBookMark([...bookMark, id]);
+                          console.log(bookMark);
+                        }}>
+                        {bookMark.toString().indexOf(id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
+                          style={{ width: '20px', height: '20px' }} alt='BookMarkOff' />}
+                        {bookMark.toString().indexOf(id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
+                          style={{ width: '20px', height: '20px' }} alt='BookMarkOn' />}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -182,8 +192,8 @@ function Poke() {
           setId((c) => { return parseInt(c + 1) });
           fetching(id + 1);
         }}>▶</button>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
