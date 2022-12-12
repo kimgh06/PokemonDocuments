@@ -37,7 +37,7 @@ function Poke() {
     <div className='Poke'>
       <form>
         <input value={id} onChange={(e) => {
-          setId(parseInt(e.target.value) || '');
+          setId(parseInt(e.target.value) || 0);
         }} placeholder='Type id or name in English' />
         &nbsp;
         <button
@@ -52,10 +52,12 @@ function Poke() {
       }}>
         <button className='sideButton' onClick={() => {
           setId((c) => {
-            if (c > 0)
+            if (c > 1)
               return parseInt(c - 1)
+            else
+              return parseInt(c)
           });
-          fetching(id - 1);
+          fetching(id > 1 ? id - 1 : id);
         }}>◀</button>
         {
           loading ? <div><h2>Loading...</h2></div> :
@@ -167,12 +169,10 @@ function Poke() {
                     }
                   </select>
                   {
-                    species.flavor_text_entries.map((i, n) => version === i.version.name && langName === i.language.name && <div
-                      key={n}
-                      value={i.version.name}
-                    >
-                      <pre>{i.flavor_text}</pre>
-                    </div>)
+                    species.flavor_text_entries.map((i, n) => version === i.version.name && langName === i.language.name &&
+                      <div key={n} value={i.version.name}>
+                        <pre>{i.flavor_text}</pre>
+                      </div>)
                   }
                 </div>
               </ul>
