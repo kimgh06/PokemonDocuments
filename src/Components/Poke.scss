@@ -27,22 +27,22 @@ $gray:#DCDCDC;
       }
     }
   }
+  .sideButton{
+    margin: 150px 0px;
+    height: 5em;
+    width: 3em;
+    border:none;
+    border-radius: 1em;
+    background-color: $gray;
+    &:hover{
+      background-color: lighten($gray, 5%);
+    }
+    &:active{
+      background-color: darken($gray, 5%);
+    }
+  }
   div{
     margin: auto;
-    button{
-      margin: 150px 0px;
-      height: 5em;
-      width: 3em;
-      border:none;
-      border-radius: 1em;
-      background-color: $gray;
-      &:hover{
-        background-color: lighten($gray, 5%);
-      }
-      &:active{
-        background-color: darken($gray, 5%);
-      }
-    }
     ul{
       list-style: square;
     }
