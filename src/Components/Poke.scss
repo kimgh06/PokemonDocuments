@@ -3,9 +3,18 @@ $gray:#DCDCDC;
 .pokeNum{
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
 .Poke{
-  width: 30em;
+  display: flex;
+  width: 40em;
   margin:auto;
+  .BookMark{
+    margin-left: 2em;
+    border: 1px solid;
+    height: 20em;
+    width: 20em;
+    overflow: scroll;
+  }
   form{
     justify-content: center;
     border-radius: 100em;

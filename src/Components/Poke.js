@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Poke.scss';
+import Bookmark from './Bookmark';
 
 function Poke() {
   const [id, setId] = useState(25);
@@ -35,163 +36,166 @@ function Poke() {
   }, []);
   return (
     <div className='Poke'>
-      <form>
-        <input value={id} onChange={(e) => {
-          setId(parseInt(e.target.value) || 0);
-        }} placeholder='Type id or name in English' />
-        &nbsp;
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            fetching(parseInt(id));
-          }}
-        >Submit</button>
-      </form>
-      <div style={{
-        display: 'flex',
-      }}>
-        <button className='sideButton' onClick={() => {
-          setId((c) => {
-            if (c > 1)
-              return parseInt(c - 1)
-            else
-              return parseInt(c)
-          });
-          fetching(id > 1 ? id - 1 : id);
-        }}>◀</button>
-        {
-          loading ? <div><h2>Loading...</h2></div> :
-            <div style={{
-              marginLeft: '-12px',
-              width: '100%',
-              textAlign: 'center',
-            }}>
-              <ul>
-                <div style={{
-                  justifyContent: 'center',
-                  display: 'flex',
-                }}>
-                  <b className='pokeNum' style={{
-                    color: `${species.color.name}`
-                  }}>{poke.id}</b>
-                  &nbsp;
-                  <div style={{ margin: '0px' }}>
-                    <span>
-                      {species.names[langNo].name}
-                    </span>
+      <div>
+        <form>
+          <input value={id} onChange={(e) => {
+            setId(parseInt(e.target.value) || 0);
+          }} placeholder='Type id or name in English' />
+          &nbsp;
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              fetching(parseInt(id));
+            }}
+          >Submit</button>
+        </form>
+        <div style={{
+          display: 'flex',
+        }}>
+          <button className='sideButton' onClick={() => {
+            setId((c) => {
+              if (c > 1)
+                return parseInt(c - 1)
+              else
+                return parseInt(c)
+            });
+            fetching(id > 1 ? id - 1 : id);
+          }}>◀</button>
+          {
+            loading ? <div><h2>Loading...</h2></div> :
+              <div style={{
+                marginLeft: '-12px',
+                width: '100%',
+                textAlign: 'center',
+              }}>
+                <ul>
+                  <div style={{
+                    justifyContent: 'center',
+                    display: 'flex',
+                  }}>
+                    <b className='pokeNum' style={{
+                      color: `${species.color.name}`
+                    }}>{poke.id}</b>
                     &nbsp;
-                    <select defaultValue={langNo} onChange={(e) => {
-                      setLangNo(e.target.value);
-                      setLangName(e.target[e.target.value].text);
-                    }} title='Select your language'>
-                      {species.names.map((i, n) => <option key={n} value={i.language.url.slice(-2, -1) - 1}>{i.language.name}</option>)}
-                    </select>
-                    <div style={{ display: 'flex' }}>
-                      {species.genera.map((i, n) => langName === i.language.name && <div key={n} value={i.language.name} >{i.genus}</div>)}
-                      <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)', marginTop: '3px' }}
-                        onClick={() => {
-                          bookMark.toString().indexOf(id) !== -1 ? setBookMark(bookMark.filter((e) => e !== id)) : setBookMark([...bookMark, id]);
-                        }}>
-                        {bookMark.toString().indexOf(id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
-                          style={{ width: '20px', height: '20px' }} alt='BookMarkOff' title='BookMarkOff' />}
-                        {bookMark.toString().indexOf(id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
-                          style={{ width: '20px', height: '20px' }} alt='BookMarkOn' title='BookMarkOn' />}
-                      </button>
+                    <div style={{ margin: '0px' }}>
+                      <span>
+                        {species.names[langNo].name}
+                      </span>
+                      &nbsp;
+                      <select defaultValue={langNo} onChange={(e) => {
+                        setLangNo(e.target.value);
+                        setLangName(e.target[e.target.value].text);
+                      }} title='Select your language'>
+                        {species.names.map((i, n) => <option key={n} value={i.language.url.slice(-2, -1) - 1}>{i.language.name}</option>)}
+                      </select>
+                      <div style={{ display: 'flex' }}>
+                        {species.genera.map((i, n) => langName === i.language.name && <div key={n} value={i.language.name} >{i.genus}</div>)}
+                        <button style={{ border: 'none', backgroundColor: 'rgb(0,0,0,0)', marginTop: '5px' }}
+                          onClick={() => {
+                            bookMark.toString().indexOf(id) !== -1 ? setBookMark(bookMark.filter((e) => e !== id)) : setBookMark([...bookMark, id]);
+                          }}>
+                          {bookMark.toString().indexOf(id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
+                            style={{ width: '20px', height: '20px' }} alt='BookMarkOff' title='북마크하기' />}
+                          {bookMark.toString().indexOf(id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
+                            style={{ width: '20px', height: '20px' }} alt='BookMarkOn' title='북마크끄기' />}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <img src={poke.sprites.back_default} title={`The back of ${name}`} alt={name} />
-                  <img src={poke.sprites.front_default} title={`The front of ${name}`} alt={name} />
-                </div>
-                <li>
-                  {generation}
-                  {(() => {
-                    switch (generation % 20) {
-                      case 1:
-                        return 'st';
-                      case 2:
-                        return 'nd';
-                      case 3:
-                        return 'rd';
-                      default:
-                        return 'th';
-                    }
-                  })()} generation
-                </li>
-                <li>
-                  {`${name}`}'s height : {(poke.height) / 10} m
-                </li>
-                <li>
-                  {`${name}`}'s weight : {(poke.weight) / 10} kg
-                </li>
-                {//진화 전
-                  species.evolves_from_species &&
+                  <div>
+                    <img src={poke.sprites.back_default} title={`The back of ${name}`} alt={name} />
+                    <img src={poke.sprites.front_default} title={`The front of ${name}`} alt={name} />
+                  </div>
                   <li>
-                    evolved from : <span onClick={() => {
-                      setId((current) => { return parseInt(species.evolves_from_species.url.slice(42, -1)) });
-                      fetching(species.evolves_from_species.url.slice(42, -1));
-                    }}>
-                      <b className='pokeNum' style={{
-                        color: `${species.color.name}`
-                      }}>{species.evolves_from_species.url.slice(42, -1)}</b>&nbsp;
-                      {species.evolves_from_species.name}</span>
+                    {generation}
+                    {(() => {
+                      switch (generation % 20) {
+                        case 1:
+                          return 'st';
+                        case 2:
+                          return 'nd';
+                        case 3:
+                          return 'rd';
+                        default:
+                          return 'th';
+                      }
+                    })()} generation
                   </li>
-                }
-                { //진화 후
-                  evolve.chain.evolves_to.length ? evolve.chain.species.name === poke.name &&
-                    <li>evolves to : <span onClick={() => {
-                      setId((current) => { return parseInt(evolve.chain.evolves_to[0].species.url.slice(42, -1)) });
-                      fetching(evolve.chain.evolves_to[0].species.url.slice(42, -1));
-                    }}><b className='pokeNum' style={{
-                      color: `${species.color.name}`
-                    }}>{evolve.chain.evolves_to[0].species.url.slice(42, -1)}</b>
-                      &nbsp;{evolve.chain.evolves_to[0].species.name}</span>
-                    </li> : ''
-                }
-                {
-                  evolve.chain.evolves_to.length ? (evolve.chain.evolves_to[0].evolves_to.length ?
-                    evolve.chain.evolves_to[0].species.name === poke.name &&
-                    <li>evolves to: <span onClick={() => {
-                      setId(parseInt(evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1)));
-                      fetching(evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1));
-                    }}><b className='pokeNum' style={{
-                      color: `${species.color.name}`
-                    }}>{evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1)}</b>
-                      &nbsp;{evolve.chain.evolves_to[0].evolves_to[0].species.name}</span>
-                    </li> : '') : ''
-                }
-                <div>
-                  <select defaultValue={version} onChange={(e) => {
-                    setVersion(e.target.value);
-                  }}
-                    style={{
-                      fontSize: '15px',
-                      textAlign: 'center',
-                      borderRadius: '8px',
-                      marginTop: '1em',
-                    }}>
-                    <option>--Choose--</option>
-                    {
-                      species.flavor_text_entries.map((i, n) => langName === i.language.name &&
-                        <option key={n} value={i.version.name}>{i.version.name}</option>)
-                    }
-                  </select>
-                  {
-                    species.flavor_text_entries.map((i, n) => version === i.version.name && langName === i.language.name &&
-                      <div key={n} value={i.version.name}>
-                        <pre>{i.flavor_text}</pre>
-                      </div>)
+                  <li>
+                    {`${name}`}'s height : {(poke.height) / 10} m
+                  </li>
+                  <li>
+                    {`${name}`}'s weight : {(poke.weight) / 10} kg
+                  </li>
+                  {//진화 전
+                    species.evolves_from_species &&
+                    <li>
+                      evolved from : <span onClick={() => {
+                        setId((current) => { return parseInt(species.evolves_from_species.url.slice(42, -1)) });
+                        fetching(species.evolves_from_species.url.slice(42, -1));
+                      }}>
+                        <b className='pokeNum' style={{
+                          color: `${species.color.name}`
+                        }}>{species.evolves_from_species.url.slice(42, -1)}</b>&nbsp;
+                        {species.evolves_from_species.name}</span>
+                    </li>
                   }
-                </div>
-              </ul>
-            </div>
-        }
-        <button className='sideButton' onClick={() => {
-          setId((c) => { return parseInt(c + 1) });
-          fetching(id + 1);
-        }}>▶</button>
-      </div >
+                  { //진화 후
+                    evolve.chain.evolves_to.length ? evolve.chain.species.name === poke.name &&
+                      <li>evolves to : <span onClick={() => {
+                        setId((current) => { return parseInt(evolve.chain.evolves_to[0].species.url.slice(42, -1)) });
+                        fetching(evolve.chain.evolves_to[0].species.url.slice(42, -1));
+                      }}><b className='pokeNum' style={{
+                        color: `${species.color.name}`
+                      }}>{evolve.chain.evolves_to[0].species.url.slice(42, -1)}</b>
+                        &nbsp;{evolve.chain.evolves_to[0].species.name}</span>
+                      </li> : ''
+                  }
+                  {
+                    evolve.chain.evolves_to.length ? (evolve.chain.evolves_to[0].evolves_to.length ?
+                      evolve.chain.evolves_to[0].species.name === poke.name &&
+                      <li>evolves to: <span onClick={() => {
+                        setId(parseInt(evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1)));
+                        fetching(evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1));
+                      }}><b className='pokeNum' style={{
+                        color: `${species.color.name}`
+                      }}>{evolve.chain.evolves_to[0].evolves_to[0].species.url.slice(42, -1)}</b>
+                        &nbsp;{evolve.chain.evolves_to[0].evolves_to[0].species.name}</span>
+                      </li> : '') : ''
+                  }
+                  <div>
+                    <select defaultValue={version} onChange={(e) => {
+                      setVersion(e.target.value);
+                    }}
+                      style={{
+                        fontSize: '15px',
+                        textAlign: 'center',
+                        borderRadius: '8px',
+                        marginTop: '1em',
+                      }}>
+                      <option>--Choose--</option>
+                      {
+                        species.flavor_text_entries.map((i, n) => langName === i.language.name &&
+                          <option key={n} value={i.version.name}>{i.version.name}</option>)
+                      }
+                    </select>
+                    {
+                      species.flavor_text_entries.map((i, n) => version === i.version.name && langName === i.language.name &&
+                        <div key={n} value={i.version.name}>
+                          <pre>{i.flavor_text}</pre>
+                        </div>)
+                    }
+                  </div>
+                </ul>
+              </div>
+          }
+          <button className='sideButton' onClick={() => {
+            setId((c) => { return parseInt(c + 1) });
+            fetching(id + 1);
+          }}>▶</button>
+        </div>
+      </div>
+      <Bookmark Bookmark={bookMark} toggle={true} />
     </div >
   );
 }
