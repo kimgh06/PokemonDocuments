@@ -9,12 +9,11 @@ $gray:#DCDCDC;
   width: 40em;
   margin:auto;
   .BookMark{
-    font-family: 'Nanum Gothic', sans-serif;
     margin-left: 2em;
     .BookMarkList{
       border: 1px solid;
       height: 20em;
-      width: 15em;
+      width: 10em;
       overflow-y: scroll;
     }
   }

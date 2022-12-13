@@ -164,7 +164,7 @@ function Poke() {
                         &nbsp;{evolve.chain.evolves_to[0].evolves_to[0].species.name}</span>
                       </li> : '') : ''
                   }
-                  <div>
+                  <div style={{ height: '140px' }}>
                     <select defaultValue={version} onChange={(e) => {
                       setVersion(e.target.value);
                     }}
