@@ -1,6 +1,16 @@
 import React from "react";
 
 function Bookmark({ Bookmark, setIdFuc }) {
+  Bookmark.sort(function (a, b) {
+    if (a.id < b.id) {
+      return -1;
+    }
+    else if (a.id > b.id) {
+      return 1;
+    }
+    else
+      return 0;
+  })
   return <div className="BookMark">
     <span><b>Bookmark</b></span>
     <div className="BookMarkList">
