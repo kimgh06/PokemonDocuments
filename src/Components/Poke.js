@@ -4,6 +4,7 @@ import Bookmark from './Bookmark';
 
 function Poke() {
   const [id, setId] = useState(25);
+  const [text, setText] = useState(id);
   const [bookMark, setBookMark] = useState([]); /*북마크 번호 배열*/
   const [langNo, setLangNo] = useState(2); //언어 번호
   const [langName, setLangName] = useState('ko'); //설명을 띄우기 위한 언어이름 설정
@@ -14,10 +15,12 @@ function Poke() {
   const [species, setSpecies] = useState([]);
   const [evolve, setEvolve] = useState([]);
   const [loading, setLoading] = useState(true);
-  const fetching = async (id) => {
+  const fetching = async (text) => {
     try {
       setLoading(true);
-      const json = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)).json();
+      setId(text);
+      setText(text);
+      const json = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${text}/`)).json();
       const species = await (await fetch(json.species.url)).json();
       const evolve = await (await fetch(species.evolution_chain.url)).json();
       setPoke(json);
@@ -38,14 +41,14 @@ function Poke() {
     <div className='Poke'>
       <div>
         <form>
-          <input value={id} onChange={(e) => {
-            setId(parseInt(e.target.value) || 0);
-          }} placeholder='Type id or name in English' />
+          <input value={text} onChange={(e) => {
+            setText(parseInt(e.target.value) || '');
+          }} placeholder='Type id in this tag' />
           &nbsp;
           <button
             onClick={(e) => {
               e.preventDefault();
-              fetching(parseInt(id));
+              fetching(parseInt(text));
             }}
           >Submit</button>
         </form>
