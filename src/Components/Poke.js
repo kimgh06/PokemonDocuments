@@ -196,7 +196,7 @@ function Poke() {
           }}>▶</button>
         </div>
       </div>
-      <Bookmark Bookmark={bookMark} toggle={true} />
+      <Bookmark Bookmark={bookMark} setIdFuc={(e) => { setId(e); fetching(e) }} />
     </div >
   );
 }
