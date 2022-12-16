@@ -99,9 +99,9 @@ function Poke() {
                               : setBookMark([...bookMark, { id, name, color: species.color.name }]);
                           }}>
                           {bookMark.findIndex(e => e.id === id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
-                            style={{ width: '20px', height: '20px' }} alt='BookMarkOff' title='북마크하기' />}
+                            style={{ width: '20px', height: '20px' }} alt='BookarmkOff' title='Bookmark' />}
                           {bookMark.findIndex(e => e.id === id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
-                            style={{ width: '20px', height: '20px' }} alt='BookMarkOn' title='북마크끄기' />}
+                            style={{ width: '20px', height: '20px' }} alt='BookmarkOn' title='Bookmark off' />}
                         </button>
                       </div>
                     </div>
