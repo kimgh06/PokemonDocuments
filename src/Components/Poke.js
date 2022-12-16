@@ -99,7 +99,7 @@ function Poke() {
                               : setBookMark([...bookMark, { id, name, color: species.color.name }]);
                           }}>
                           {bookMark.findIndex(e => e.id === id) === -1 && <img src='https://cdn.icon-icons.com/icons2/2716/PNG/512/bookmarks_icon_173322.png'
-                            style={{ width: '20px', height: '20px' }} alt='BookarmkOff' title='Bookmark' />}
+                            style={{ width: '20px', height: '20px' }} alt='BookmarkOff' title='Bookmark' />}
                           {bookMark.findIndex(e => e.id === id) !== -1 && <img src='https://cdn.icon-icons.com/icons2/2717/PNG/512/bookmarks_icon_174004.png'
                             style={{ width: '20px', height: '20px' }} alt='BookmarkOn' title='Bookmark off' />}
                         </button>
@@ -155,7 +155,7 @@ function Poke() {
                         &nbsp;{evolve.chain.evolves_to[0].species.name}</span>
                       </li> : ''
                   }
-                  {
+                  { //진화 후
                     evolve.chain.evolves_to.length ? (evolve.chain.evolves_to[0].evolves_to.length ?
                       evolve.chain.evolves_to[0].species.name === poke.name &&
                       <li>evolves to: <span onClick={() => {
@@ -167,7 +167,7 @@ function Poke() {
                         &nbsp;{evolve.chain.evolves_to[0].evolves_to[0].species.name}</span>
                       </li> : '') : ''
                   }
-                  <div style={{ height: '140px' }}>
+                  <div style={{ height: '140px' }}> {/* 포켓몬 설명 창 */}
                     <select defaultValue={version} onChange={(e) => {
                       setVersion(e.target.value);
                     }}
