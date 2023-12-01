@@ -1,1 +1,4 @@
-설명 : https://super-apartment-c46.notion.site/2022-12-384ba0922b254a87a405e35bf0a57700
+# PokemonDocuments
+This project is the Document of Pokemon.
+I used to [pokeapi](https://pokeapi.co/) to make this.
+Have yourself to the project.
